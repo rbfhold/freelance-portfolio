@@ -8,20 +8,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg1:#0b1224; --bg2:#0f1a33; /* gradient */
-      --panel:#0f1a33; --text:#e9eef7; --muted:#a8b3c7;
-      --accent:#38bdf8; --accent2:#34d399;
-      --card:#111c38; --border:#1f2b4a; --radius:18px;
-      --shadow:0 18px 40px rgba(0,0,0,.45);
+      --bg1:#0b1224; --bg2:#0f1a33; --panel:#0f1a33; --text:#e9eef7; --muted:#a8b3c7;
+      --accent:#38bdf8; --border:#1f2b4a; --radius:18px; --shadow:0 18px 40px rgba(0,0,0,.45);
+      --card:#111c38; --inset:#ffffff; --insetText:#0b1224;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--text);
+    *{box-sizing:border-box} html,body{margin:0;height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--text);
       background: radial-gradient(1200px 800px at -10% -10%, #1a2a55 0%, transparent 40%),
                   radial-gradient(1200px 800px at 110% 10%, #0f2f49 0%, transparent 42%),
                   linear-gradient(160deg,var(--bg1),var(--bg2));}
     a{color:var(--accent);text-decoration:none}
     .wrap{max-width:1150px;margin:auto;padding:32px}
-    /* Header */
     header{display:flex;flex-wrap:wrap;align-items:center;gap:18px;justify-content:space-between;margin-bottom:26px}
     .id{display:flex;align-items:center;gap:14px}
     .logo{width:54px;height:54px;border-radius:16px;background:
@@ -32,7 +28,6 @@
     .badges{display:flex;gap:10px;flex-wrap:wrap}
     .badge{background:rgba(255,255,255,.05);border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:.82rem}
 
-    /* Grid */
     .panel{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:22px;padding:18px;box-shadow:var(--shadow)}
     h2{margin:0 0 12px 0;font-size:1.05rem;color:#cfe4ff}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -44,11 +39,19 @@
       box-shadow:var(--shadow);transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease}
     .card:hover{transform:translateY(-4px);box-shadow:0 22px 46px rgba(0,0,0,.55);border-color:#2b3d68}
     .thumbWrap{position:relative;isolation:isolate}
-    .thumb{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;filter:saturate(1.05) contrast(1.02)}
-    .overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(4,10,24,.9), rgba(4,10,24,.0) 60%);opacity:.85}
-    .chipRow{position:absolute;left:12px;bottom:12px;display:flex;gap:8px;z-index:1}
-    .chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(4px);
+    .thumb{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;filter:saturate(1.05) contrast(1.02);transform:scale(1);transition:transform .35s ease}
+    .card:hover .thumb{transform:scale(1.04)}
+    .overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(6,12,26,.85), rgba(6,12,26,.15) 65%)}
+    /* White inset skills box */
+    .inset{position:absolute;inset:auto 16px 16px 16px;background:var(--inset);color:var(--insetText);
+      border-radius:14px;padding:12px 14px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+    .inset .inTitle{font-weight:800;margin-bottom:2px}
+    .inset .inSub{font-size:.9rem;color:#334155}
+    /* Success chips row */
+    .chipRow{position:absolute;left:12px;top:12px;display:flex;gap:8px;z-index:1;flex-wrap:wrap}
+    .chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(4px);
       color:#e9eef7;padding:6px 10px;border-radius:999px;font-size:.78rem}
+
     .meta{padding:14px 16px;border-top:1px solid var(--border);background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01))}
     .title{font-weight:700;margin-bottom:6px}
     .subtitle{font-size:.9rem;color:var(--muted)}
@@ -75,7 +78,7 @@
         <div class="logo" aria-hidden="true"></div>
         <div>
           <h1>Robert Fruchtman – Freelance Portfolio</h1>
-          <div class="tag">5-Star Rated • 5+ Clients • Multiple Repeat Customers</div>
+          <div class="tag">Upwork: 5 Clients • Multiple 5★ Reviews • Repeat Hires</div>
         </div>
       </div>
       <div class="badges">
@@ -121,12 +124,14 @@
   </div>
 
   <script>
-    // Project data (uses your PNGs as thumbnails)
+    // Each project now has "inset" (white box text) and "success" (Upwork proof) arrays
     const projects = [
       {
         title: 'Bookkeeping & Monthly Financial Reconciliation',
         subtitle: 'Repeat Client Project',
         img: 'bookkeeping.png',
+        inset: ['Bookkeeping','Monthly Reconciliation'],
+        success: ['5★ Rated','Repeat Client'],
         desc: 'Reconciled monthly business finances including expense categorization, bank matching, and account balancing. Delivered organized reports that improved financial tracking and decision-making. Client returned for 3 additional projects within 2 months.',
         skills: ['Bookkeeping','Excel','Financial Reporting','Data Entry']
       },
@@ -134,6 +139,8 @@
         title: 'Data Entry – High Accuracy Spreadsheets',
         subtitle: 'Repeat Client Project',
         img: 'data_entry.png',
+        inset: ['Data Entry','High Accuracy'],
+        success: ['5★ Rated','Repeat Client'],
         desc: 'Cleaned and standardized large datasets, removed duplicates, and ensured 100% accuracy for reporting. Repeat client hired me for multiple rounds of database cleanup.',
         skills: ['Data Entry','Excel','QC/Validation']
       },
@@ -141,6 +148,8 @@
         title: 'AI Document Categorization Tool',
         subtitle: 'Automation Project',
         img: 'ai_categorization.png',
+        inset: ['Python + ML','Auto-Tagging'],
+        success: ['5★ Rated'],
         desc: 'Python-based tool that processes PDF, DOCX, and DOC files and auto-categorizes documents by content, exporting results to CSV. Reduced manual classification time to near zero.',
         skills: ['Python','Automation','Machine Learning','NLP']
       },
@@ -148,6 +157,8 @@
         title: 'SQL/Python Data Extraction & Report Automation',
         subtitle: 'Analytics Project',
         img: 'sql_python.png',
+        inset: ['SQL + Python','Reporting'],
+        success: ['5★ Rated'],
         desc: 'Developed SQL queries and Python scripts to extract and process data from databases, producing actionable reports. Reduced manual reporting time by 80% while improving accuracy.',
         skills: ['SQL','Python','Data Cleaning','Reporting']
       },
@@ -155,6 +166,8 @@
         title: 'WordPress Site Edits & Maintenance',
         subtitle: 'Improved UX & Security',
         img: 'wordpress.png',
+        inset: ['WordPress','Maintenance'],
+        success: ['5★ Rated'],
         desc: 'Ongoing WordPress maintenance including content updates, plugin management, and layout adjustments for better user experience and security. Ensured stability and improved engagement.',
         skills: ['WordPress','HTML/CSS','Site Maintenance']
       },
@@ -162,6 +175,8 @@
         title: 'Invoice Entry Accuracy',
         subtitle: 'PDF → Spreadsheet',
         img: 'invoice_entry.png',
+        inset: ['PDF → Sheet','Accuracy'],
+        success: ['5★ Rated'],
         desc: 'Converted PDF invoices into clean, structured spreadsheets for easier reporting and tracking. Delivered 100% accuracy with fast turnaround times.',
         skills: ['Data Entry','Excel','Accuracy Verification']
       }
@@ -180,21 +195,19 @@
       card.className = 'card';
       card.tabIndex = 0; card.setAttribute('role','button'); card.setAttribute('aria-label', p.title);
 
-      const wrap = document.createElement('div');
-      wrap.className = 'thumbWrap';
-
-      const img = document.createElement('img');
-      img.className = 'thumb';
-      img.src = p.img; img.alt = p.title;
-
+      const wrap = document.createElement('div'); wrap.className = 'thumbWrap';
+      const img = document.createElement('img'); img.className = 'thumb'; img.src = p.img; img.alt = p.title;
       const overlay = document.createElement('div'); overlay.className = 'overlay';
 
+      // Success chips (Upwork proof)
       const chipRow = document.createElement('div'); chipRow.className = 'chipRow';
-      const chip1 = document.createElement('span'); chip1.className='chip'; chip1.textContent = p.subtitle;
-      const chip2 = document.createElement('span'); chip2.className='chip'; chip2.textContent = p.skills[0];
-      chipRow.append(chip1, chip2);
+      p.success.forEach(s => { const c=document.createElement('span'); c.className='chip'; c.textContent=s; chipRow.appendChild(c); });
 
-      wrap.append(img, overlay, chipRow);
+      // White inset skills box
+      const inset = document.createElement('div'); inset.className = 'inset';
+      inset.innerHTML = `<div class="inTitle">${p.inset[0]}</div><div class="inSub">${p.inset[1]||''}</div>`;
+
+      wrap.append(img, overlay, chipRow, inset);
 
       const meta = document.createElement('div');
       meta.className = 'meta';
@@ -214,11 +227,7 @@
       modalTitle.textContent = p.title;
       modalDesc.textContent = p.desc;
       modalChips.innerHTML = '';
-      p.skills.forEach(s => {
-        const span = document.createElement('span');
-        span.className='chip2'; span.textContent = s;
-        modalChips.appendChild(span);
-      });
+      p.skills.forEach(s => { const span=document.createElement('span'); span.className='chip2'; span.textContent=s; modalChips.appendChild(span); });
       modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
     }
     function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
