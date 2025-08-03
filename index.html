@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robert Fruchtman – Freelance Portfolio</title>
+  <meta name="description" content="Data Entry, Bookkeeping, WordPress, AI/Automation, SQL/Python – 5-star rated with repeat clients." />
+  <style>
+    :root{
+      --bg:#0f172a; --panel:#111827; --muted:#94a3b8; --text:#e5e7eb;
+      --accent:#22d3ee; --card:#111827; --cardBorder:#1f2937;
+      --shadow:0 10px 25px rgba(0,0,0,.35); --radius:16px;
+    }
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:1100px;margin:auto;padding:28px}
+    header{display:flex;flex-wrap:wrap;align-items:center;gap:18px;justify-content:space-between;margin-bottom:24px}
+    header .id{display:flex;align-items:center;gap:14px}
+    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#22d3ee,#60a5fa);box-shadow:var(--shadow)}
+    h1{font-size:1.35rem;margin:0}
+    .tag{color:var(--muted);font-size:.95rem}
+    .badges{display:flex;gap:10px;flex-wrap:wrap}
+    .badge{background:#0b1022;border:1px solid #1f2a44;color:#c7d2fe;padding:6px 10px;border-radius:999px;font-size:.8rem}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.grid{grid-template-columns:1fr}}
+
+    .card{position:relative;background:var(--card);border:1px solid var(--cardBorder);
+      border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+      cursor:pointer;transition:transform .25s ease, box-shadow .25s ease}
+    .card:focus,.card:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(0,0,0,.45)}
+    .thumb{aspect-ratio: 4/3;display:block;width:100%;object-fit:cover;background:#0b1022}
+    .meta{padding:14px}
+    .title{font-weight:700}
+    .skills{margin-top:6px;color:var(--muted);font-size:.9rem}
+
+    section{margin-top:26px}
+    .panel{background:var(--panel);border:1px solid var(--cardBorder);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    h2{margin:0 0 12px 0;font-size:1.1rem}
+
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.66);padding:20px;z-index:50}
+    .modal.open{display:flex}
+    .dialog{max-width:820px;width:100%;background:var(--panel);border:1px solid var(--cardBorder);
+      border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+    .dialog img{display:block;width:100%;height:auto;background:#0b1022}
+    .dialog .body{padding:18px}
+    .dialog h3{margin:0 0 8px 0}
+    .dialog p{margin:6px 0}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{border:1px solid #25324a;border-radius:999px;padding:6px 10px;color:#cbd5e1;font-size:.85rem;background:#0b1022}
+    .closeBtn{position:absolute;top:14px;right:14px;background:#0b1022;border:1px solid #243045;color:#e2e8f0;border-radius:10px;padding:6px 10px;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="id">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Robert Fruchtman – Freelance Portfolio</h1>
+          <div class="tag">5-Star Rated • 5+ Clients • Multiple Repeat Customers</div>
+        </div>
+      </div>
+      <div class="badges">
+        <span class="badge">Data Entry</span>
+        <span class="badge">Bookkeeping</span>
+        <span class="badge">WordPress</span>
+        <span class="badge">AI/Automation</span>
+        <span class="badge">SQL/Python</span>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2>Featured Work</h2>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Skills</h2>
+      <p>Data Entry & Bookkeeping • Excel • Financial Reporting • WordPress • HTML/CSS • Python • SQL • Automation • Machine Learning • NLP • Data Cleaning • Report Automation</p>
+    </section>
+
+    <section class="panel">
+      <h2>Contact</h2>
+      <p>
+        <strong>Upwork:</strong> <a href="#" id="upwork">Add your Upwork link</a><br/>
+        <strong>LinkedIn:</strong> <a href="#" id="linkedin">Add your LinkedIn link</a><br/>
+        <strong>Email:</strong> <a href="mailto:your@email.com">your@email.com</a>
+      </p>
+    </section>
+  </div>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="dialog">
+      <button class="closeBtn" id="closeBtn" aria-label="Close">Close</button>
+      <img id="modalImg" alt="Project preview" />
+      <div class="body">
+        <h3 id="modalTitle"></h3>
+        <p id="modalDesc"></p>
+        <div class="chips" id="modalChips"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const projects = [
+      {
+        title: 'Bookkeeping & Monthly Financial Reconciliation',
+        subtitle: 'Repeat Client Project',
+        img: 'bookkeeping.png',
+        desc: 'Reconciled monthly business finances including expense categorization, bank matching, and account balancing. Delivered organized reports that improved financial tracking and decision-making. Client returned for 3 additional projects within 2 months.',
+        skills: ['Bookkeeping','Excel','Financial Reporting','Data Entry']
+      },
+      {
+        title: 'Data Entry – High Accuracy Spreadsheets',
+        subtitle: 'Repeat Client Project',
+        img: 'data_entry.png',
+        desc: 'Cleaned and standardized large datasets, removed duplicates, and ensured 100% accuracy for reporting. Repeat client hired me for multiple rounds of database cleanup.',
+        skills: ['Data Entry','Excel','QC/Validation']
+      },
+      {
+        title: 'AI Document Categorization Tool',
+        subtitle: 'Automation Project',
+        img: 'ai_categorization.png',
+        desc: 'Python-based tool that processes PDF, DOCX, and DOC files and auto-categorizes documents by content, exporting results to CSV. Reduced manual classification time to near zero.',
+        skills: ['Python','Automation','Machine Learning','NLP']
+      },
+      {
+        title: 'SQL/Python Data Extraction & Report Automation',
+        subtitle: 'Analytics Project',
+        img: 'sql_python.png',
+        desc: 'Developed SQL queries and Python scripts to extract and process data from databases, producing actionable reports. Reduced manual reporting time by 80% while improving accuracy.',
+        skills: ['SQL','Python','Data Cleaning','Reporting']
+      },
+      {
+        title: 'WordPress Site Edits & Maintenance',
+        subtitle: 'Improved UX & Security',
+        img: 'wordpress.png',
+        desc: 'Ongoing WordPress maintenance including content updates, plugin management, and layout adjustments for better user experience and security. Ensured stability and improved engagement.',
+        skills: ['WordPress','HTML/CSS','Site Maintenance']
+      },
+      {
+        title: 'Invoice Entry Accuracy',
+        subtitle: 'PDF → Spreadsheet',
+        img: 'invoice_entry.png',
+        desc: 'Converted PDF invoices into clean, structured spreadsheets for easier reporting and tracking. Delivered 100% accuracy with fast turnaround times.',
+        skills: ['Data Entry','Excel','Accuracy Verification']
+      }
+    ];
+
+    const grid = document.getElementById('grid');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalChips = document.getElementById('modalChips');
+    const closeBtn = document.getElementById('closeBtn');
+
+    projects.forEach(p => {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.tabIndex = 0;
+      card.setAttribute('role','button');
+      card.setAttribute('aria-label', p.title);
+
+      const img = document.createElement('img');
+      img.className = 'thumb';
+      img.src = p.img;
+      img.alt = p.title;
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.innerHTML = `<div class="title">${p.title}</div><div class="skills">${p.subtitle}</div>`;
+
+      card.appendChild(img);
+      card.appendChild(meta);
+
+      const open = () => openModal(p);
+      card.addEventListener('click', open);
+      card.addEventListener('keyup', (e) => { if(e.key === 'Enter') open(); });
+
+      grid.appendChild(card);
+    });
+
+    function openModal(p){
+      modalImg.src = p.img;
+      modalTitle.textContent = p.title;
+      modalDesc.textContent = p.desc;
+      modalChips.innerHTML = '';
+      p.skills.forEach(s=>{
+        const span = document.createElement('span');
+        span.className='chip';
+        span.textContent = s;
+        modalChips.appendChild(span);
+      });
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+    }
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+    }
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+    closeBtn.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+  </script>
+</body>
+</html>
