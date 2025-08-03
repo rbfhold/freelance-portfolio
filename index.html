@@ -1,173 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Robert Fruchtman – Freelance Portfolio</title>
-  <meta name="description" content="Data Entry, Bookkeeping, WordPress, AI/Automation, SQL/Python – 5-star rated with repeat clients." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="id">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <h1>Robert Fruchtman – Freelance Portfolio</h1>
-          <div class="tag">Upwork: 5 Clients • Multiple 5★ Reviews • Repeat Hires</div>
+<div class="wrap">
+  <header>
+    <div class="id">
+      <div class="logo"><img src="images/profile.jpg" alt="Robert Fruchtman"></div>
+      <div>
+        <h1>Robert Fruchtman – Freelance Portfolio</h1>
+        <div class="tag">Upwork: 6 Clients • Multiple 5★ Reviews • Repeat Hires • Expertise in Specialized Platforms (App Office)</div>
+        <div class="subtag">Open to Ongoing Contracts</div>
+        <div class="badges">
+          <span class="badge">100% Job Success</span>
+          <span class="badge">Rising Talent</span>
         </div>
       </div>
-      <div class="badges">
-        <span class="badge">Data Entry</span>
-        <span class="badge">Bookkeeping</span>
-        <span class="badge">WordPress</span>
-        <span class="badge">AI/Automation</span>
-        <span class="badge">SQL/Python</span>
-      </div>
-    </header>
-
-    <section class="panel">
-      <h2>Featured Work</h2>
-      <div class="grid" id="grid"></div>
-    </section>
-
-    <section class="panel sec">
-      <h2>Skills</h2>
-      <p>Data Entry & Bookkeeping • Excel • Financial Reporting • WordPress • HTML/CSS • Python • SQL • Automation • Machine Learning • NLP • Data Cleaning • Report Automation</p>
-    </section>
-
-    <section class="panel sec">
-      <h2>Contact</h2>
-      <p>
-        <strong>Upwork:</strong> <a href="https://www.upwork.com/freelancers/~YOUR_UPWORK_ID" id="upwork" target="_blank">View My Upwork Profile</a><br/>
-        <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/robertfruchtman/" id="linkedin" target="_blank">Connect on LinkedIn</a><br/>
-        <strong>Email:</strong> <a href="mailto:robert.fruchtman@example.com">robert.fruchtman@example.com</a>
-      </p>
-    </section>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="dialog">
-      <button class="closeBtn" id="closeBtn" aria-label="Close">Close</button>
-      <img id="modalImg" alt="Project preview" />
-      <div class="body">
-        <h3 id="modalTitle"></h3>
-        <p id="modalDesc"></p>
-        <div class="chips" id="modalChips"></div>
-      </div>
     </div>
-  </div>
+  </header>
 
-  <script>
-    const projects = [
-      {
-        title: 'Bookkeeping & Monthly Financial Reconciliation',
-        subtitle: 'Repeat Client Project',
-        img: 'bookkeeping.png',
-        inset: ['Bookkeeping','Monthly Reconciliation'],
-        success: ['5★ Rated','Repeat Client'],
-        desc: 'Reconciled monthly business finances including expense categorization, bank matching, and account balancing. Delivered organized reports that improved financial tracking and decision-making. Client returned for 3 additional projects within 2 months.',
-        skills: ['Bookkeeping','Excel','Financial Reporting','Data Entry']
-      },
-      {
-        title: 'Data Entry – High Accuracy Spreadsheets',
-        subtitle: 'Repeat Client Project',
-        img: 'data_entry.png',
-        inset: ['Data Entry','High Accuracy'],
-        success: ['5★ Rated','Repeat Client'],
-        desc: 'Cleaned and standardized large datasets, removed duplicates, and ensured 100% accuracy for reporting. Repeat client hired me for multiple rounds of database cleanup.',
-        skills: ['Data Entry','Excel','QC/Validation']
-      },
-      {
-        title: 'AI Document Categorization Tool',
-        subtitle: 'Automation Project',
-        img: 'ai_categorization.png',
-        inset: ['Python + ML','Auto-Tagging'],
-        success: ['5★ Rated'],
-        desc: 'Python-based tool that processes PDF, DOCX, and DOC files and auto-categorizes documents by content, exporting results to CSV. Reduced manual classification time to near zero.',
-        skills: ['Python','Automation','Machine Learning','NLP']
-      },
-      {
-        title: 'SQL/Python Data Extraction & Report Automation',
-        subtitle: 'Analytics Project',
-        img: 'sql_python.png',
-        inset: ['SQL + Python','Reporting'],
-        success: ['5★ Rated'],
-        desc: 'Developed SQL queries and Python scripts to extract and process data from databases, producing actionable reports. Reduced manual reporting time by 80% while improving accuracy.',
-        skills: ['SQL','Python','Data Cleaning','Reporting']
-      },
-      {
-        title: 'WordPress Site Edits & Maintenance',
-        subtitle: 'Improved UX & Security',
-        img: 'wordpress.png',
-        inset: ['WordPress','Maintenance'],
-        success: ['5★ Rated'],
-        desc: 'Ongoing WordPress maintenance including content updates, plugin management, and layout adjustments for better user experience and security. Ensured stability and improved engagement.',
-        skills: ['WordPress','HTML/CSS','Site Maintenance']
-      },
-      {
-        title: 'Invoice Entry Accuracy',
-        subtitle: 'PDF → Spreadsheet',
-        img: 'invoice_entry.png',
-        inset: ['PDF → Sheet','Accuracy'],
-        success: ['5★ Rated'],
-        desc: 'Converted PDF invoices into clean, structured spreadsheets for easier reporting and tracking. Delivered 100% accuracy with fast turnaround times.',
-        skills: ['Data Entry','Excel','Accuracy Verification']
-      }
-    ];
+  <section class="panel">
+    <h2>Featured Work</h2>
+    <div class="grid">
 
-    const grid = document.getElementById('grid');
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalChips = document.getElementById('modalChips');
-    const closeBtn = document.getElementById('closeBtn');
+      <!-- 1: App Office -->
+      <a href="app-office-formatting.html" class="card">
+        <div class="thumbWrap">
+          <img src="images/app_office.png" alt="App Office Formatting" class="thumb">
+          <div class="overlay"></div>
+          <div class="chipRow">
+            <span class="chip">New Client</span>
+            <span class="chip">Ongoing Contract</span>
+          </div>
+          <div class="inset">
+            <div class="inTitle">App Office</div>
+            <div class="inSub">Formatting</div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="title">Document Formatting & Standardization – App Office Suite</div>
+          <div class="subtitle">New Client Project</div>
+        </div>
+      </a>
 
-    projects.forEach(p => {
-      const card = document.createElement('article');
-      card.className = 'card';
-      card.tabIndex = 0; card.setAttribute('role','button'); card.setAttribute('aria-label', p.title);
+      <!-- 2: Bookkeeping -->
+      <a href="bookkeeping.html" class="card">
+        <div class="thumbWrap">
+          <img src="images/bookkeeping.png" alt="Bookkeeping" class="thumb">
+          <div class="overlay"></div>
+          <div class="chipRow">
+            <span class="chip">5★ Rated</span>
+            <span class="chip">Repeat Client</span>
+          </div>
+          <div class="inset">
+            <div class="inTitle">Bookkeeping</div>
+            <div class="inSub">Reconciliation</div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="title">Bookkeeping & Monthly Financial Reconciliation</div>
+          <div class="subtitle">Repeat Client Project</div>
+        </div>
+      </a>
 
-      const wrap = document.createElement('div'); wrap.className = 'thumbWrap';
-      const img = document.createElement('img'); img.className = 'thumb'; img.src = p.img; img.alt = p.title;
-      const overlay = document.createElement('div'); overlay.className = 'overlay';
+      <!-- 3: Data Entry -->
+      <a href="data-entry.html" class="card">
+        <div class="thumbWrap">
+          <img src="images/data_entry.png" alt="Data Entry" class="thumb">
+          <div class="overlay"></div>
+          <div class="chipRow">
+            <span class="chip">5★ Rated</span>
+            <span class="chip">Repeat Client</span>
+          </div>
+          <div class="inset">
+            <div class="inTitle">Data Entry</div>
+            <div class="inSub">High Accuracy</div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="title">Data Entry – High Accuracy Spreadsheets</div>
+          <div class="subtitle">Repeat Client Project</div>
+        </div>
+      </a>
 
-      const chipRow = document.createElement('div'); chipRow.className = 'chipRow';
-      p.success.forEach(s => { const c=document.createElement('span'); c.className='chip'; c.textContent=s; chipRow.appendChild(c); });
+      <!-- 4: AI Categorization -->
+      <a href="ai-categorization.html" class="card">
+        <div class="thumbWrap">
+          <img src="images/ai_categorization.png" alt="AI Categorization" class="thumb">
+          <div class="overlay"></div>
+          <div class="chipRow">
+            <span class="chip">5★ Rated</span>
+          </div>
+          <div class="inset">
+            <div class="inTitle">Python + ML</div>
+            <div class="inSub">Auto-Tagging</div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="title">AI Document Categorization Tool</div>
+          <div class="subtitle">Automation Project</div>
+        </div>
+      </a>
 
-      const inset = document.createElement('div'); inset.className = 'inset';
-      inset.innerHTML = `<div class="inTitle">${p.inset[0]}</div><div class="inSub">${p.inset[1]||''}</div>`;
+      <!-- 5: SQL/Python -->
+      <a href="sql-python.html" class="card">
+        <div class="thumbWrap">
+          <img src="images/sql_python.png" alt="SQL/Python" class="thumb">
+          <div class="overlay"></div>
+          <div class="chipRow">
+            <span class="chip">5★ Rated</span>
+          </div>
+          <div class="inset">
+            <div class="inTitle">SQL + Python</div>
+            <div class="inSub">Reporting</div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="title">SQL/Python Data Extraction & Report Automation</div>
+          <div class="subtitle">Analytics Project</div>
+        </div>
+      </a>
 
-      wrap.append(img, overlay, chipRow, inset);
+      <!-- 6: WordPress -->
+      <a href="wordpress.html" class="card">
+        <div class="thumbWrap">
+          <img src="images/wordpress.png" alt="WordPress" class="thumb">
+          <div class="overlay"></div>
+          <div class="chipRow">
+            <span class="chip">5★ Rated</span>
+          </div>
+          <div class="inset">
+            <div class="inTitle">WordPress</div>
+            <div class="inSub">Maintenance</div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="title">WordPress Site Edits & Maintenance</div>
+          <div class="subtitle">Improved UX & Security</div>
+        </div>
+      </a>
 
-      const meta = document.createElement('div');
-      meta.className = 'meta';
-      meta.innerHTML = `<div class="title">${p.title}</div><div class="subtitle">${p.subtitle}</div>`;
+      <!-- 7: Invoice Entry -->
+      <a href="invoice-entry.html" class="card">
+        <div class="thumbWrap">
+          <img src="images/invoice_entry.png" alt="Invoice Entry" class="thumb">
+          <div class="overlay"></div>
+          <div class="chipRow">
+            <span class="chip">5★ Rated</span>
+          </div>
+          <div class="inset">
+            <div class="inTitle">PDF → Sheet</div>
+            <div class="inSub">Accuracy</div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="title">Invoice Entry Accuracy</div>
+          <div class="subtitle">PDF → Spreadsheet</div>
+        </div>
+      </a>
 
-      card.append(wrap, meta);
-
-      const open = () => openModal(p);
-      card.addEventListener('click', open);
-      card.addEventListener('keyup', e => { if(e.key==='Enter') open(); });
-
-      grid.appendChild(card);
-    });
-
-    function openModal(p){
-      modalImg.src = p.img;
-      modalTitle.textContent = p.title;
-      modalDesc.textContent = p.desc;
-      modalChips.innerHTML = '';
-      p.skills.forEach(s => { const span=document.createElement('span'); span.className='chip2'; span.textContent=s; modalChips.appendChild(span); });
-      modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
-    }
-    function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
-    modal.addEventListener('click', e => { if(e.target===modal) closeModal(); });
-    closeBtn.addEventListener('click', closeModal);
-    document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
-  </script>
+    </div>
+  </section>
+</div>
 </body>
 </html>
